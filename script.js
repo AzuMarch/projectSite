@@ -1,17 +1,56 @@
 'use strict';
 
-const body = document.querySelector('body');
-const popup = document.querySelector('.popup-container');
-
-body.addEventListener('mouseleave', showPopup);
-
-function showPopup(event) {
-  popup.style.display = 'flex';
-}
-
-body.addEventListener('click', e => {
-  if(!e.target.closest('.popup')) {
-    popup.style.display = 'none';
-    body.removeEventListener('mouseleave', showPopup);
-  }
+const carSprite = document.querySelector('.player-car');
+document.addEventListener('keydown', e => {
+  car.move(e);
+  car.render();
 });
+
+const car = {
+  positionX: 0,
+  positionY: 0,
+  rotation: 0,
+
+  moveUp() {
+    this.positionY -= 10;
+    this.rotation = 90;
+  },
+
+  moveDown() {
+    this.positionY += 10;
+    this.rotation = 270;
+  },
+
+  moveLeft() {
+    this.positionX -= 10;
+    this.rotation = 0;
+  },
+
+  moveRight() {
+    this.positionX += 10;
+    this.rotation = 180;
+  },
+
+  render() {
+    carSprite.style.top = `${this.positionY}px`;
+    carSprite.style.left = `${this.positionX}px`;
+    carSprite.style.transform = `rotate(${this.rotation}deg)`;
+  },
+
+  move(e) {
+    switch (e.keyCode) {
+        case 37:
+            this.moveLeft();
+            break;
+        case 38:
+            this.moveUp();
+            break;
+        case 39:
+            this.moveRight();
+            break;
+        case 40:
+            this.moveDown();
+            break;
+    }
+  }
+};
