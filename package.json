@@ -1,0 +1,9 @@
+{
+  "name": "cars-package.json",
+  "description": "Movable car sprites with individual controls and speeds",
+  "main": "app.js",
+  "version": "1.0",
+  "devDependencies": {
+    "webpack": "^4.43.0"
+  }
+}
